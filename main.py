@@ -72,7 +72,7 @@ def convert(var, v_type):
         print("spelt it wrong dumbass")
 
 
-def calculate_subnet(ip, subnet_mask):
+def calculate_subnet(ip, subnet_mask, subnet):
     current_step = 0
     while current_step < len(ip):
         subnet.append(ip[current_step] * subnet_mask[current_step])
@@ -85,8 +85,9 @@ u_bin_ip = calculate_bin(u_ip.split("."))
 
 u_mask_bits = input("Input mask bits (1-32): ")
 u_subnet_mask_bin = []
+u_subnet1 = []
 u_subnet_mask_bin = calculate_subnet_mask(u_mask_bits, u_subnet_mask_bin)
 u_subnet_mask = calculate_nonbin(u_subnet_mask_bin)
-u_subnet = calculate_subnet(u_bin_ip, u_subnet_mask_bin)
+u_subnet = calculate_subnet(u_bin_ip, u_subnet_mask_bin, u_subnet1)
 
 print(f"IP: {u_ip}\nIP binary: {u_bin_ip}\nMask Bits: {u_mask_bits}\nSubnet mask binary: {u_subnet_mask_bin}\nSubnet mask: {u_subnet_mask}\nSubnet: {u_subnet}")
