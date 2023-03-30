@@ -78,8 +78,33 @@ def calculate_subnet(ip, subnet_mask, subnet):
     return subnet
 
 
-def calculate_bcast(subnet):
+def calculate_bcast(subnet, mask):
+    current_step = 0
+    bcast = []
     for x in subnet:
-        if x == 0:
-            subnet
+        if current_step <= mask:
+            bcast.append(x)
+        else:
+            bcast.append(1)
+        current_step += 1
+    return bcast
 
+
+def establish_range(subnet, bcast):
+    currentsub = 3
+    while currentsub > -1:
+        if subnet[currentsub] != 255.0:
+            subnet[currentsub] += 1
+            break
+        else:
+            subnet[currentsub] = 0
+            currentsub -= 1
+    currentsub = 3
+    while currentsub > -1:
+        if bcast[currentsub] != 0.0:
+            bcast[currentsub] -= 1
+            break
+        else:
+            bcast[currentsub] = 255.0
+            currentsub -= 1
+    return f"{subnet} - {bcast}"
